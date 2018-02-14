@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta charset="UTF-8">
+
+        <title>RDF2h Browser</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <meta name="viewport" content="width=1000, initial-scale=1.0">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <link rel="shortcut icon" href="./rdf_flyer.24.png">
+        
+    </head>
+    <body>
+        <div id="settings">
+            <form>
+                <ul>
+                    <li class="route">
+                        URI Prefix: <input type="text" value="http://data.admin.ch">
+                        SPARQL-Endpoint: <input type="text" value="https://lindas-data.ch/sparql">
+                    </li>
+                    <li class="route">
+                        URI Prefix: <input type="text" value="http://classifications.data.admin.ch">
+                        SPARQL-Endpoint: <input type="text" value="https://lindas-data.ch/sparql">
+                    </li>
+                    <li class="route">
+                        URI Prefix: <input type="text" value="http://treatment.plazi.org">
+                        SPARQL-Endpoint: <input type="text" value="https://lindas-data.ch/sparql">
+                    </li>
+                    <li class="route">
+                        URI Prefix: <input type="text" value="http://taxon-concept.plazi.org/">
+                        SPARQL-Endpoint: <input type="text" value="https://lindas-data.ch/sparql">
+                    </li>
+                    <li class="renderers">
+                        Renderer URIs: <input class="renderer-uri" type="text" value="https://rawgit.com/rdf2h/renderers/master/fallback-renderers.ttl">
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div id="browser">
+            <form id="lookup">
+                URI: <input type="text" value="http://dbpedia.org/resource/Bern" id="uri"><button id="go">Go!</button>
+            </form>
+            <div id="results">
+                resource will show up here.
+            </div>
+        </div>
+        <script src="js/index.js"></script>
+    </body>
+</html>
