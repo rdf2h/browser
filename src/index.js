@@ -2,7 +2,6 @@ import rdf2h from "rdf2h";
 import GraphNode from "rdfgraphnode";
 import $rdf from "rdflib";
 
-//This should load an RDF document using the methods dexcribed in the config
 //returns a promise for the graph
 function loadData(uri) {
     function routes() {
@@ -30,7 +29,7 @@ function loadData(uri) {
     return GraphNode.rdfFetch(uri).then((res) => res.graph);
 }
 
-document.getElementById("lookup").onsubmit = () => {
+function showResource() {
     try {
         let rus = document.getElementsByClassName("renderer-uri");
         let loadPromises = [];
@@ -41,11 +40,24 @@ document.getElementById("lookup").onsubmit = () => {
         };
         let uri = document.getElementById("uri").value;
         loadPromises.push(loadData(uri).then((g) => dataGraph = g));
-        Promise.all(loadPromises).then(() => {
-            document.getElementById("results").innerHTML = new RDF2h(renderers).render(dataGraph, uri)
+        Promise.all(loadPromises).catch((e) => alert(e)).then(() => {
+            let resultsElement = document.getElementById("results");
+            resultsElement.innerHTML = new RDF2h(renderers).render(dataGraph, uri);
+            let links = Array.from(resultsElement.getElementsByTagName('a'));
+            links.forEach((link) => {
+                link.onclick = function () {
+                    document.getElementById("uri").value = link.href;
+                    showResource();
+                    return false;
+                }
+            });
         });
     } catch(e) {
         console.error("Exception processing settings",e);
     }
+}
+
+document.getElementById("lookup").onsubmit = () => {
+    showResource();
     return false;
 };
