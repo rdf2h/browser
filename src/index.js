@@ -5,6 +5,21 @@ import $rdf from "rdflib";
 //This should load an RDF document using the methods dexcribed in the config
 //returns a promise for the graph
 function loadData(uri) {
+    function routes() {
+        return Array.from(document.getElementsByClassName("route")).map((div) => {
+            let route = {};
+            route.endPoint = div.getElementsByClassName('sparql-endpoint')[0].value;
+            route.pattern = new RegExp(div.getElementsByClassName('uri-pattern')[0].value,"yi");
+            route.loadData = function(uri) {
+                alert("cant load "+uri+" with "+route.endPoint);
+            };
+            return route;
+        });
+    }
+    let route = routes().find((route) => route.pattern.test(uri));
+    if (route) {
+        return route.loadData(uri);
+    }
     return GraphNode.rdfFetch(uri).then((res) => res.graph);
 }
 
