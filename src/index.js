@@ -64,3 +64,26 @@ document.getElementById("lookup").onsubmit = () => {
     showResource();
     return false;
 };
+
+$("#add_route").on("click",() => {
+    $("#routes").append('<div class="form-row route"><div class="form-group col-6"><input type="text" class="form-control uri-pattern" placeholder="https://*.example.org"></div><div class="form-group col-6"><input type="text" class="form-control sparql-endpoint" placeholder="https://example.org/sparql"></div></div>');
+})
+
+$("#add_renderer").on("click",() => {
+    $("#renderers").append('<div class="form-group renderers"><input type="text" class="form-control renderer-uri" placeholder="https://example.org/renderer.ttl"></div>');
+})
+
+$('#settings').on('hide.bs.modal', function (e) {
+    Array.from(document.getElementsByClassName("renderer-uri")).forEach((ru) => {
+        if (ru.value.trim() === "") {
+            ru.parentElement.removeChild(ru);
+        }
+    });
+    Array.from(document.getElementsByClassName("route")).forEach((ro) => {
+        let uriPattern = ro.getElementsByClassName("uri-pattern")[0].value.trim();
+        let sparqlEndpoint = ro.getElementsByClassName("sparql-endpoint")[0].value.trim();
+        if ((uriPattern === "") && (sparqlEndpoint === "")){
+            ro.parentElement.removeChild(ro);
+        }
+    });
+})
