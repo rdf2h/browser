@@ -31,9 +31,11 @@ function loadData(uri) {
 
 function showResource() {
     let resultsElement = document.getElementById("results");
+    let goButton = document.getElementById("go");
     setTimeout(() => {
         try {
-            resultsElement.innerHTML  = "<img src='waiting-wheel-300x300.gif' alt='please wait' />";
+            resultsElement.innerHTML  = '<h5>Please wait until data is loaded.<h5>';
+            goButton.innerHTML = '<span class="oi oi-clock"></span>';
             let rus = document.getElementsByClassName("renderer-uri");
             let loadPromises = [];
             let renderers = $rdf.graph();
@@ -45,6 +47,7 @@ function showResource() {
             loadPromises.push(loadData(uri).then((g) => dataGraph = g));
             Promise.all(loadPromises).catch((e) => alert(e)).then(() => {
                 resultsElement.innerHTML = new RDF2h(renderers).render(dataGraph, uri);
+                goButton.innerHTML = '<span class="oi oi-chevron-right"></span>';
                 let links = Array.from(resultsElement.getElementsByTagName('a'));
                 links.forEach((link) => {
                     link.onclick = function () {
