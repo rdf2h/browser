@@ -11,39 +11,100 @@
         <meta name="viewport" content="width=1000, initial-scale=1.0">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
         <link rel="shortcut icon" href="./rdf_flyer.24.png">
-        
     </head>
-    <body>
-        <div id="settings">
-            <form>
-                <ul>
-                    <li class="route">
-                        URI Pattern: <input type="text" value="http://data.admin.ch" class="uri-pattern">
-                        SPARQL-Endpoint: <input type="text" value="https://lindas-data.ch/sparql" class="sparql-endpoint">
-                    </li>
-                    <li class="route">
-                        URI Pattern: <input type="text" value="http://classifications.data.admin.ch" class="uri-pattern">
-                        SPARQL-Endpoint: <input type="text" value="https://lindas-data.ch/sparql" class="sparql-endpoint">
-                    </li>
-                    <li class="route">
-                        URI Pattern: <input type="text" value="http://.*.plazi.org" class="uri-pattern">
-                        SPARQL-Endpoint: <input type="text" value="https://lindas-data.ch/sparql" class="sparql-endpoint">
-                    </li>
-                    <li class="renderers">
-                        Renderer URIs: <input class="renderer-uri" type="text" value="https://rawgit.com/rdf2h/renderers/master/fallback-renderers.ttl">
-                    </li>
-                </ul>
-            </form>
+    <body id="browser">
+        <div class="container">
+            <h1>
+                YANSWYA
+                <small class="text-muted">
+                    Yet Another Linked Data Browser
+                </small>
+            </h1>
         </div>
-        <div id="browser">
-            <form id="lookup">
-                URI: <input type="text" value="http://dbpedia.org/resource/Bern" id="uri"><button id="go">Go!</button>
-            </form>
-            <div id="results">
-                resource will show up here.
+        <div class="bg-dark mb-3 py-3">
+            <div class="container">
+                <form class="input-group" id="lookup">
+                    <input class="form-control border border-secondary" type="text" placeholder="resource uri" value="http://classifications.data.admin.ch/municipality/1024" id="uri">
+                    <div class="input-group-append bg-light">
+                        <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#settings"><span class="oi oi-cog"></span></button>
+                        <button class="btn btn-primary rounded-0" type="submit" id="go"><span class="oi oi-chevron-right"></span></button>
+                    </div>
+                </form>
             </div>
         </div>
+
+        <div class="modal fade" id="settings" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Settings</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="routes">
+                            <div class="mb-1 form-row">
+                                <div class="mb-0 form-group col-6 ">
+                                    <label>URI-pattern</label>
+                                </div>
+                                <div class="mb-0 form-group col-6">
+                                    <label>SPARQL-endpoint</label>
+                                </div>
+                            </div>
+                            <div class="form-row route">
+                                <div class="form-group col-6">
+                                    <input type="text" class="form-control uri-pattern" value="http://data.admin.ch" placeholder="https://*.example.org">
+                                </div>
+                                <div class="form-group col-6">
+                                    <input type="text" value="https://lindas-data.ch/sparql" class="form-control sparql-endpoint" placeholder="https://example.org/sparql">
+                                </div>
+                            </div>
+                            <div class="form-row route">
+                                <div class="form-group col-6">
+                                    <input type="text" class="form-control uri-pattern" value="http://classifications.data.admin.ch" placeholder="https://*.example.org">
+                                </div>
+                                <div class="form-group col-6">
+                                    <input type="text" value="https://lindas-data.ch/sparql" class="form-control sparql-endpoint" placeholder="https://example.org/sparql">
+                                </div>
+                            </div>
+                            <div class="form-row route">
+                                <div class="form-group col-6">
+                                    <input type="text" class="form-control uri-pattern" value="http://.*.plazi.org" placeholder="https://*.example.org">
+                                </div>
+                                <div class="form-group col-6">
+                                    <input type="text" value="https://lindas-data.ch/sparql" class="form-control sparql-endpoint" placeholder="https://example.org/sparql">
+                                </div>
+                            </div>
+                        </form>
+                        <form id="renderers">
+                            <div class="mt-3 mb-1 form-group">
+                                <label>Renderer URIs</label>
+                            </div>
+                            <div class="form-group renderers">
+                                <input type="text" class="form-control renderer-uri" value="https://rawgit.com/rdf2h/renderers/master/fallback-renderers.ttl"
+                                    placeholder="https://rawgit.com/rdf2h/renderers/master/fallback-renderers.ttl">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="add_route" class="btn btn-secondary">
+                            <span class="oi oi-plus"></span> Add new route</button>
+                        <button id="add_renderer" class="btn btn-secondary">
+                            <span class="oi oi-plus"></span> Add new renderer-URI</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" id="results">
+            <p>resource will show up here.</p>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="js/index.js"></script>
     </body>
 </html>
