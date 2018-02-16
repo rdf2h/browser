@@ -17,7 +17,7 @@ function loadData(uri) {
                     if (!response.ok) {
                         throw response.status;
                     } else {
-                        return response.graph;
+                        return response.graph();
                     }
                 });
             }
@@ -27,7 +27,7 @@ function loadData(uri) {
     if (route) {
         return route.loadData(uri);
     }
-    return GraphNode.rdfFetch(uri).then((res) => res.graph);
+    return GraphNode.rdfFetch(uri).then((res) => res.graph());
 }
 
 function showResource() {
@@ -41,7 +41,8 @@ function showResource() {
         let renderers = $rdf.graph();
         let dataGraph;
         for (let i = 0; i < rus.length; i++) {
-            loadPromises.push(GraphNode.rdfFetch(rus[i].value).then((res) => renderers.addAll(res.graph.statements)));
+            loadPromises.push(GraphNode.rdfFetch(rus[i].value).then((res) => res.graph())
+            .then((graph) => renderers.addAll(graph.statements)));
         };
         let uri = document.getElementById("uri").value;
         loadPromises.push(loadData(uri).then((g) => dataGraph = g));
