@@ -67,6 +67,12 @@ document.getElementById("lookup").onsubmit = () => {
     return false;
 };
 
+if (window.location.hash !== "") {
+    let uri = window.location.hash.substring(1);
+    document.getElementById("uri").value = uri;
+    showResource();
+}
+
 $("#add_route").on("click",() => {
     $("#routes").append('<div class="form-row route"><div class="form-group col-6"><input type="text" class="form-control uri-pattern" placeholder="https://*.example.org"></div><div class="form-group col-6"><input type="text" class="form-control sparql-endpoint" placeholder="https://example.org/sparql"></div></div>');
 })
