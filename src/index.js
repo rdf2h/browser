@@ -4,6 +4,7 @@ import $rdf from "rdflib";
 
 //returns a promise for the graph
 function loadData(uri) {
+    window.location.hash = uri;
     function routes() {
         return Array.from(document.getElementsByClassName("route")).map((div) => ({
             'endPoint' : div.getElementsByClassName('sparql-endpoint')[0].value,
@@ -32,35 +33,33 @@ function loadData(uri) {
 function showResource() {
     let resultsElement = document.getElementById("results");
     let goButton = document.getElementById("go");
-    setTimeout(() => {
-        try {
-            resultsElement.innerHTML  = '<h5>Please wait until data is loaded.<h5>';
-            goButton.innerHTML = '<span class="oi oi-clock"></span>';
-            let rus = document.getElementsByClassName("renderer-uri");
-            let loadPromises = [];
-            let renderers = $rdf.graph();
-            let dataGraph;
-            for (let i = 0; i < rus.length; i++) {
-                loadPromises.push(GraphNode.rdfFetch(rus[i].value).then((res) => renderers.addAll(res.graph.statements)));
-            };
-            let uri = document.getElementById("uri").value;
-            loadPromises.push(loadData(uri).then((g) => dataGraph = g));
-            Promise.all(loadPromises).catch((e) => alert(e)).then(() => {
-                resultsElement.innerHTML = new RDF2h(renderers).render(dataGraph, uri);
-                goButton.innerHTML = '<span class="oi oi-chevron-right"></span>';
-                let links = Array.from(resultsElement.getElementsByTagName('a'));
-                links.forEach((link) => {
-                    link.onclick = function () {
-                        document.getElementById("uri").value = link.href;
-                        showResource();
-                        return false;
-                    }
-                });
+    try {
+        resultsElement.innerHTML  = '<h5>Please wait until data is loaded.<h5>';
+        goButton.innerHTML = '<span class="oi oi-clock"></span>';
+        let rus = document.getElementsByClassName("renderer-uri");
+        let loadPromises = [];
+        let renderers = $rdf.graph();
+        let dataGraph;
+        for (let i = 0; i < rus.length; i++) {
+            loadPromises.push(GraphNode.rdfFetch(rus[i].value).then((res) => renderers.addAll(res.graph.statements)));
+        };
+        let uri = document.getElementById("uri").value;
+        loadPromises.push(loadData(uri).then((g) => dataGraph = g));
+        Promise.all(loadPromises).catch((e) => alert(e)).then(() => {
+            resultsElement.innerHTML = new RDF2h(renderers).render(dataGraph, uri);
+            goButton.innerHTML = '<span class="oi oi-chevron-right"></span>';
+            let links = Array.from(resultsElement.getElementsByTagName('a'));
+            links.forEach((link) => {
+                link.onclick = function () {
+                    document.getElementById("uri").value = link.href;
+                    showResource();
+                    return false;
+                }
             });
-        } catch(e) {
-            console.error("Exception processing settings",e);
-        }
-    }, 1);
+        });
+    } catch(e) {
+        console.error("Exception processing settings",e);
+    }
 }
 
 document.getElementById("lookup").onsubmit = () => {
