@@ -3177,7 +3177,17 @@ mime-db@~1.30.0:
   version "1.30.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.30.0.tgz#74c643da2dd9d6a45399963465b26d5ca7d71f01"
 
-mime-types@^2.1.12, mime-types@~2.1.15, mime-types@~2.1.16, mime-types@~2.1.17, mime-types@~2.1.7:
+mime-db@~1.33.0:
+  version "1.33.0"
+  resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.33.0.tgz#a3492050a5cb9b63450541e39d9788d2272783db"
+
+mime-types@^2.1.12, mime-types@~2.1.17:
+  version "2.1.18"
+  resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.18.tgz#6f323f60a83d11146f831ff11fd66e2fe5503bb8"
+  dependencies:
+    mime-db "~1.33.0"
+
+mime-types@~2.1.15, mime-types@~2.1.16, mime-types@~2.1.7:
   version "2.1.17"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.17.tgz#09d7a393f03e995a79f8af857b70a9e0ab16557a"
   dependencies:
@@ -4104,7 +4114,7 @@ rc@^1.1.7:
 
 rdf2h@rdf2h/rdf2h#v2.0:
   version "0.5.1"
-  resolved "https://codeload.github.com/rdf2h/rdf2h/tar.gz/7372b443259e156b8b10a8a01be87fa3d324cdb3"
+  resolved "https://codeload.github.com/rdf2h/rdf2h/tar.gz/8349c93d18ce81506c18bf850c04747208a2a222"
   dependencies:
     mustache "*"
     rdfgraphnode "1.1.0"
@@ -4116,9 +4126,9 @@ rdfgraphnode@1.1.0:
   dependencies:
     rdflib "^0.16.5"
 
-rdfgraphnode@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/rdfgraphnode/-/rdfgraphnode-1.1.5.tgz#c4d95ac4440982ffa6f049ded15488c217180120"
+rdfgraphnode@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/rdfgraphnode/-/rdfgraphnode-1.2.0.tgz#9bd21f2c313712816c177fe8e7bd55d223294e3e"
   dependencies:
     node-fetch "^1.7.3"
     rdflib "^0.16.5"
