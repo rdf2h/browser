@@ -26,6 +26,6 @@
   "dependencies": {
     "jquery": "^3.3.1",
     "rdf2h": "rdf2h/rdf2h#v2.0",
-    "rdfgraphnode": "^1.2.0"
+    "rdfgraphnode": "^1.2.2"
   }
 }

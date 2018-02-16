@@ -4126,9 +4126,9 @@ rdfgraphnode@1.1.0:
   dependencies:
     rdflib "^0.16.5"
 
-rdfgraphnode@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/rdfgraphnode/-/rdfgraphnode-1.2.0.tgz#9bd21f2c313712816c177fe8e7bd55d223294e3e"
+rdfgraphnode@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/rdfgraphnode/-/rdfgraphnode-1.2.2.tgz#6dff115223c904ce91c643234860e2e5b785079b"
   dependencies:
     node-fetch "^1.7.3"
     rdflib "^0.16.5"
