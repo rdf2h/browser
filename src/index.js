@@ -5,6 +5,13 @@ import $rdf from "rdflib";
 //returns a promise for the graph
 function loadData(uri) {
     window.location.hash = uri;
+    function checkResponse(response) {
+        if (!response.ok) {
+            throw "("+response.status+") "+response.statusText;
+        } else {
+            return response.graph();
+        }
+    }
     function routes() {
         return Array.from(document.getElementsByClassName("route")).map((div) => ({
             'endPoint' : div.getElementsByClassName('sparql-endpoint')[0].value,
@@ -12,14 +19,7 @@ function loadData(uri) {
             'loadData' : function(uri) {
                 console.log("loading "+uri+" with "+this.endPoint);
                 let query = `DESCRIBE <${uri}>`;
-                return GraphNode.rdfFetch(this.endPoint + "?query=" + encodeURIComponent(query)).then(response =>
-                {
-                    if (!response.ok) {
-                        throw response.status;
-                    } else {
-                        return response.graph();
-                    }
-                });
+                return GraphNode.rdfFetch(this.endPoint + "?query=" + encodeURIComponent(query)).then(r => checkResponse(r));
             }
         }));
     }
@@ -27,7 +27,7 @@ function loadData(uri) {
     if (route) {
         return route.loadData(uri);
     }
-    return GraphNode.rdfFetch(uri).then((res) => res.graph());
+    return GraphNode.rdfFetch(uri).then(r => checkResponse(r));
 }
 
 function showResource() {
@@ -46,7 +46,7 @@ function showResource() {
         };
         let uri = document.getElementById("uri").value;
         loadPromises.push(loadData(uri).then((g) => dataGraph = g));
-        Promise.all(loadPromises).catch((e) => alert(e)).then(() => {
+        Promise.all(loadPromises).then(() => {
             resultsElement.innerHTML = new RDF2h(renderers).render(dataGraph, uri);
             goButton.innerHTML = '<span class="oi oi-chevron-right"></span>';
             let links = Array.from(resultsElement.getElementsByTagName('a'));
@@ -57,6 +57,9 @@ function showResource() {
                     return false;
                 }
             });
+        }).catch((e) => {
+            resultsElement.innerHTML = '<div class="alert alert-warning" role="alert">' + e + '</div>';
+            goButton.innerHTML = '<span class="oi oi-chevron-right"></span>';;
         });
     } catch(e) {
         console.error("Exception processing settings",e);
@@ -67,6 +70,12 @@ document.getElementById("lookup").onsubmit = () => {
     showResource();
     return false;
 };
+
+document.getElementById("example").onclick = function () {
+    document.getElementById("uri").value = "http://classifications.data.admin.ch/municipality/1024";
+    showResource();
+    return false;
+}
 
 if (window.location.hash !== "") {
     let uri = window.location.hash.substring(1);
