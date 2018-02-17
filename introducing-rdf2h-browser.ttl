@@ -1,0 +1,13 @@
+@prefix s: <http://schema.org/> .
+
+<>  a s:Article ;
+    s:about <http://rdf2h-browser.linked.solutions/> ;
+    s:description "An artilce introducing RDF2h Browser" ;
+    s:headline "Yet another Linked Data Browser" ;
+    s:articleBody "The RDF2h Browser allows to browse Linked Data fromthe Web and from SPARQL enpoints. The RDF2h resources available as RDF can be retieved and showed".
+
+<http://rdf2h-browser.linked.solutions/> a s:WebApplication ;
+    s:creator "FactsMission" ;
+    s:name "RDF2h Browser" ;
+    s:isBasedOn <http://rdf2h.github.io/rdf2h/> ;
+    s:description "RDF2h browser is a pure client-side app to browser Linked Data." .
