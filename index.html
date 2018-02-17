@@ -8,28 +8,40 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="initial-scale=1.0">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
         <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
         <link rel="shortcut icon" href="./rdf_flyer.24.png">
     </head>
     <body id="browser">
-        <div class="container">
-            <h1>
-                YANSWYA
-                <small class="text-muted">
-                    Yet Another Linked Data Browser
-                </small>
-            </h1>
+        <div class="py-3">
+            <div class="container-fluid">
+                <form class="input-group">
+                    <input class="form-control border-0" type="text">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#settings">
+                            <span class="oi oi-cog"></span>
+                        </button>
+                        <button class="btn btn-primary" type="submit">
+                            <span class="oi oi-chevron-right"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="bg-dark mb-3 py-3 sticky-top">
-            <div class="container">
+        
+        <div class="bg-dark text-light py-3 fixed-top">
+            <div class="container-fluid">
                 <form class="input-group" id="lookup">
-                    <input class="form-control border border-secondary" type="text" placeholder="resource uri" value="http://classifications.data.admin.ch/municipality/1024" id="uri">
-                    <div class="input-group-append bg-light">
-                        <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#settings"><span class="oi oi-cog"></span></button>
-                        <button class="btn btn-primary rounded-0" type="submit" id="go"><span class="oi oi-chevron-right"></span></button>
+                    <input class="form-control border-0" type="text" placeholder="Resource URI" id="uri">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#settings">
+                            <span class="oi oi-cog"></span>
+                        </button>
+                        <button class="btn btn-primary" type="submit" id="go">
+                            <span class="oi oi-chevron-right"></span>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -115,8 +127,31 @@
             </div>
         </div>
 
-        <div class="container" id="results">
+        <div class="container-fluid my-3" id="results">
             <h5>Resource will show up here.</h5>
+            <button id="example" class="btn btn-primary">Example</button>
+        </div>
+
+        <div class="py-1 d-none">
+            <div class="container-fluid d-flex justify-content-between">
+                <p class="mb-0">Have a look at the
+                    <a href="https://github.com/rdf2h/browser">Github Repository</a>
+                </p>
+                <p class="mb-0">YANSWYA is developed by
+                    <a href="https://factsmission.com/">FactsMission</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="bg-dark text-light py-1 fixed-bottom">
+            <div class="container-fluid d-flex justify-content-between">
+                <p class="mb-0">Have a look at the
+                    <a href="https://github.com/rdf2h/browser">Github Repository</a>
+                </p>
+                <p class="mb-0">RDF2h-browser is developed by
+                    <a href="https://factsmission.com/">FactsMission</a>
+                </p>
+            </div>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
