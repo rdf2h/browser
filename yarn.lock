@@ -4100,21 +4100,15 @@ rc@^1.1.7:
 
 rdf2h@rdf2h/rdf2h#v2.0:
   version "0.5.1"
-  resolved "https://codeload.github.com/rdf2h/rdf2h/tar.gz/8349c93d18ce81506c18bf850c04747208a2a222"
+  resolved "https://codeload.github.com/rdf2h/rdf2h/tar.gz/233332e73ea1a1ab52ef2529a6bf3eab502b7e66"
   dependencies:
     mustache "*"
-    rdfgraphnode "1.1.0"
+    rdfgraphnode "1.2.3"
     rdflib "^0.16.5"
 
-rdfgraphnode@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/rdfgraphnode/-/rdfgraphnode-1.1.0.tgz#9e5f09224f9cbb6b89c64852ed90adcb5e151c95"
-  dependencies:
-    rdflib "^0.16.5"
-
-rdfgraphnode@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/rdfgraphnode/-/rdfgraphnode-1.2.2.tgz#6dff115223c904ce91c643234860e2e5b785079b"
+rdfgraphnode@1.2.3, rdfgraphnode@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/rdfgraphnode/-/rdfgraphnode-1.2.3.tgz#59145bfde9d86db919cb55171af48190166b7ca0"
   dependencies:
     node-fetch "^1.7.3"
     rdflib "^0.16.5"
