@@ -67,8 +67,9 @@ function showResource() {
             let links = Array.from(resultsElement.getElementsByTagName('a'));
             links.forEach((link) => {
                 link.onclick = function () {
-                    document.getElementById("uri").value = link.href;
-                    showResource();
+                    window.location.hash = link.href;
+                    //document.getElementById("uri").value = link.href;
+                    //showResource();
                     return false;
                 }
             });
@@ -91,16 +92,32 @@ document.getElementById("example").onclick = function () {
     showResource();
     return false;
 }
-{
+function setUriFieldFromHash() {
     let uri;    
     if (window.location.hash !== "") {
         uri = window.location.hash.substring(1);
     } else {
         uri = window.location.href + "introducing-rdf2h-browser.ttl";
     }
-    document.getElementById("uri").value = uri;
-    showResource();
+    if (document.getElementById("uri").value !== uri) {
+        document.getElementById("uri").value = uri;
+        return true;
+    } else {
+        return false;
+    }
 }
+
+setUriFieldFromHash();
+showResource();
+
+
+window.onhashchange = event => {
+    console.log("location: "+window.location.href);
+    if (setUriFieldFromHash()) {
+        showResource();
+    }
+}
+
 $("#add_route").on("click",() => {
     $("#routes").append('<div class="form-row route"><div class="form-group col-6"><input type="text" class="form-control uri-pattern" placeholder="https://*.example.org"></div><div class="form-group col-6"><input type="text" class="form-control sparql-endpoint" placeholder="https://example.org/sparql"></div></div>');
 })
