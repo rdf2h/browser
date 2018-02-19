@@ -87,11 +87,7 @@ document.getElementById("lookup").onsubmit = () => {
     return false;
 };
 
-document.getElementById("example").onclick = function () {
-    document.getElementById("uri").value = "http://classifications.data.admin.ch/municipality/1024";
-    showResource();
-    return false;
-}
+
 function setUriFieldFromHash() {
     let uri;    
     if (window.location.hash !== "") {
