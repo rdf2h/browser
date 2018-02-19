@@ -4,7 +4,13 @@
     s:about <http://rdf2h-browser.linked.solutions/> ;
     s:description "An artilce introducing RDF2h Browser" ;
     s:headline "Yet another Linked Data Browser" ;
-    s:articleBody "The RDF2h Browser allows to browse Linked Data fromthe Web and from SPARQL enpoints. The RDF2h resources available as RDF can be retieved and showed".
+    s:articleBody """The RDF2h Browser allows to browse Linked Data from the Web and from SPARQL enpoints. The resources available as RDF can be retieved and showed. 
+    For example you may access resource on the Swiss Linked Data Platform Lindas such as 
+    <a href="http://classifications.data.admin.ch/municipality/1024">http://classifications.data.admin.ch/municipality/1024</a>,
+    or a resource from the UK governmental SPARQL endpoint such as <a href="http://reference.data.gov.uk/id/department/justice">
+    http://reference.data.gov.uk/id/department/justice</a>, a
+    resources from DBpedia such as <a href="http://dbpedia.org/resource/Biel/Bienne">http://dbpedia.org/resource/Biel/Bienne</a> 
+    or from wikidata <a href="http://www.wikidata.org/entity/Q28665865">http://www.wikidata.org/entity/Q28665865</a>""".
 
 <http://rdf2h-browser.linked.solutions/> a s:WebApplication ;
     s:creator "FactsMission" ;
