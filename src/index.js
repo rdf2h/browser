@@ -2,6 +2,21 @@ import rdf2h from "rdf2h";
 import GraphNode from "rdfgraphnode";
 import $rdf from "rdflib";
 
+function escapeHtml(str) {
+    return str.replace(/[&<>"'\/]/g, function (s) {
+      var entityMap = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': '&quot;',
+          "'": '&#39;',
+          "/": '&#x2F;'
+        };
+
+      return entityMap[s];
+    });
+}
+
 //returns a promise for the graph
 function loadData(uri) {
     window.location.hash = uri;
@@ -58,7 +73,7 @@ function showResource() {
                 }
             });
         }).catch((e) => {
-            resultsElement.innerHTML = '<div class="alert alert-warning" role="alert">' + e + '</div>';
+            resultsElement.innerHTML = '<div class="alert alert-warning" role="alert">' + escapeHtml(e.toString()) + '</div>';
             goButton.innerHTML = '<span class="oi oi-chevron-right"></span>';;
         });
     } catch(e) {
