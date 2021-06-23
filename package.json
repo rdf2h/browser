@@ -24,7 +24,7 @@
     "webpack-dev-server": "^2.9.7"
   },
   "dependencies": {
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "rdf2h": "rdf2h/rdf2h#v2.0",
     "rdfgraphnode": "^1.2.3"
   }
