@@ -2,6 +2,8 @@ import rdf2h from "rdf2h";
 import GraphNode from "rdfgraphnode";
 import $rdf from "rdflib";
 
+window.RDF2h = rdf2h
+
 function escapeHtml(str) {
     return str.replace(/[&<>"'\/]/g, function (s) {
       var entityMap = {
@@ -62,7 +64,7 @@ function showResource() {
         let uri = document.getElementById("uri").value;
         loadPromises.push(loadData(uri).then((g) => dataGraph = g));
         Promise.all(loadPromises).then(() => {
-            resultsElement.innerHTML = new RDF2h(renderers).render(dataGraph, uri);
+            resultsElement.innerHTML = new RDF2h(renderers).render(dataGraph, $rdf.sym(uri));
             goButton.innerHTML = '<span class="oi oi-chevron-right"></span>';
             let links = Array.from(resultsElement.getElementsByTagName('a'));
             links.forEach((link) => {
@@ -74,8 +76,9 @@ function showResource() {
                 }
             });
         }).catch((e) => {
-            resultsElement.innerHTML = '<div class="alert alert-warning" role="alert">' + escapeHtml(e.toString()) + '</div>';
+            resultsElement.innerHTML = '<div class="alert alert-warning" role="alert">judaahu' + escapeHtml(e.toString()) + '</div>';
             goButton.innerHTML = '<span class="oi oi-chevron-right"></span>';;
+            console.error(e.stack)
         });
     } catch(e) {
         console.error("Exception processing settings",e);

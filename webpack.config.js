@@ -1,5 +1,6 @@
 // This library allows us to combine paths easily
 const path = require('path');
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 //const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
@@ -10,7 +11,20 @@ module.exports = {
     filename: 'js/index.js'
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    fallback: {
+      "fs": false,
+      "tls": false,
+      "net": false,
+      "path": false,
+      "zlib": false,
+      "http": false,
+      "https": false,
+      "crypto": false,
+      "stream": require.resolve("stream-browserify"),
+      "buffer": require.resolve("buffer/"),
+      "util": require.resolve("util/")
+    } 
   },
   module: {
     rules: [
@@ -18,7 +32,11 @@ module.exports = {
         test: /\.js/,
         use: {
           loader: 'babel-loader',
-          options: { presets: ['env'] }
+          options: {
+            presets: [
+              ['@babel/preset-env', { targets: "defaults" }]
+            ]
+          }
         }
       },
       {
@@ -38,5 +56,11 @@ module.exports = {
       title: 'RDF2h Browser',
       template: 'pages/index.ejs'
     })*/
+    new webpack.ProvidePlugin({
+      Buffer: ['buffer', 'Buffer'],
+  }),
+  new webpack.ProvidePlugin({
+      process: 'process/browser',
+    })
   ]
 };
